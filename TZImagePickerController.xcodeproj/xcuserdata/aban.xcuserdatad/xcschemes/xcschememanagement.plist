@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>TZImagePickerController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>900E657B1C2BB8D5003D9A9E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>900E65941C2BB8D5003D9A9E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>900E659F1C2BB8D5003D9A9E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
