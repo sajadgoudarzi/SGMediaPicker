@@ -3,10 +3,11 @@
 //  TZImagePickerController
 //
 //  Created by Aban on 4/27/18.
-//  Copyright © 2018 谭真. All rights reserved.
+//  Copyright © 2018 Aban. All rights reserved.
 //
 
 #import "SGMediaCaptionCustomTextView.h"
+
 
 @implementation SGMediaCaptionCustomTextView
 {
@@ -28,17 +29,29 @@
     if (self)
     {
         actualEmptySize = frame.size;
+        self.delegate = self;
+        self.layer.cornerRadius = 4;
     }
     return self;
+}
+
+- (void)setDelegate:(id<UITextViewDelegate>)delegate
+{
+    super.delegate = self;
 }
 
 
 
 - (void)setText:(NSString *)text
 {
-    if (!self.text || [self.text isEqualToString:self.placeHolderText])
+    if (!text || [text isEqualToString:self.placeHolderText])
     {
         text = self.placeHolderText;
+        self.textColor = self.placeHolderTextColor;
+    }
+    else
+    {
+        self.textColor = self.defaultTextColor;
     }
     super.text = text;
     [self adjustFrameWithText];
@@ -62,6 +75,14 @@
     }
 }
 
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([super.text isEqualToString:self.placeHolderText])
+    {
+        super.text = nil;
+    }
+}
 
 
 @end

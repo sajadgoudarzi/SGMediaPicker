@@ -3,7 +3,7 @@
 //  TZImagePickerController
 //
 //  Created by Aban on 4/27/18.
-//  Copyright © 2018 谭真. All rights reserved.
+//  Copyright © 2018 Aban. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -18,11 +18,14 @@
 
 
 
-@interface SGMediaCaptionCustomTextView : UITextView
+@interface SGMediaCaptionCustomTextView : UITextView <UITextViewDelegate>
 
 @property (nonatomic, strong) UIColor* placeHolderTextColor;
 @property (nonatomic, strong) NSString* placeHolderText;
 @property (nonatomic, strong) UIFont* placeHolderFont;
+
+@property (nonatomic, strong) UIColor* defaultTextColor;
+@property (nonatomic, strong) UIFont* defaultTextFont;
 
 
 @property (nonatomic, assign) CGFloat maxHeight;

@@ -325,7 +325,7 @@
         _mediaCaption.textColor = [UIColor whiteColor];
         _mediaCaption.font = [UIFont systemFontOfSize:15];
         
-        _mediaCaption.placeHolderText = @"add caption";
+        _mediaCaption.placeHolderText = @"add caption ...";
         _mediaCaption.placeHolderTextColor = [UIColor grayColor];
         _mediaCaption.placeHolderFont = [UIFont systemFontOfSize:15];
     }
@@ -341,10 +341,7 @@
 {
     [self addMediaCaptionTextView];
     
-    if (string)
-    {
-        _mediaCaption.text = string;
-    }
+    _mediaCaption.text = string;
 
 }
 
