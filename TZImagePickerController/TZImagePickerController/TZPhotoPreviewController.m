@@ -13,6 +13,7 @@
 #import "TZImagePickerController.h"
 #import "TZImageManager.h"
 #import "TZImageCropManager.h"
+#import "SGMediaCaptionCustomTextView.h"
 
 @interface TZPhotoPreviewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate> {
     UICollectionView *_collectionView;
@@ -29,6 +30,8 @@
     UILabel *_numberLabel;
     UIButton *_originalPhotoButton;
     UILabel *_originalPhotoLabel;
+    UIButton *_addTextButton;
+    SGMediaCaptionCustomTextView *_mediaCaption;
 }
 @property (nonatomic, assign) BOOL isHideNaviBar;
 @property (nonatomic, strong) UIView *cropBgView;
@@ -153,12 +156,24 @@
     _numberLabel.text = [NSString stringWithFormat:@"%zd",_tzImagePickerVc.selectedModels.count];
     _numberLabel.hidden = _tzImagePickerVc.selectedModels.count <= 0;
     _numberLabel.backgroundColor = [UIColor clearColor];
+    
+    
+    // Add Text Button
+    
+    _addTextButton = [[UIButton alloc] init];
+    _addTextButton.frame = CGRectMake(_numberLabel.frame.origin.x - 50, 7, 34, 34);
+    [_addTextButton addTarget:self action:@selector(addTextButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [_addTextButton setImage:[UIImage imageNamed:@"text.png"] forState:UIControlStateNormal];
+//    [_addTextButton setBackgroundImage:[UIImage imageNamed:@"text.png"] forState:UIControlStateNormal];
+
 
     [_originalPhotoButton addSubview:_originalPhotoLabel];
     [_toolBar addSubview:_doneButton];
     [_toolBar addSubview:_originalPhotoButton];
     [_toolBar addSubview:_numberImageView];
     [_toolBar addSubview:_numberLabel];
+    [_toolBar addSubview:_addTextButton];
+    [_toolBar bringSubviewToFront:_addTextButton];
     [self.view addSubview:_toolBar];
 }
 
@@ -280,6 +295,60 @@
         self.backButtonClickBlock(_isSelectOriginalPhoto);
     }
 }
+
+- (void)addTextButtonClicked
+{
+    if ([self.view.subviews containsObject:_mediaCaption])
+    {
+        [self removeMeidaCaptionTextView];
+    }
+    else
+    {
+        [self showMediaCaptionWithString:nil];
+        
+    }
+
+}
+
+- (void)removeMeidaCaptionTextView
+{
+    [_mediaCaption removeFromSuperview];
+}
+
+- (void)addMediaCaptionTextView
+{
+    if (!_mediaCaption)
+    {
+        _mediaCaption = [[SGMediaCaptionCustomTextView alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height - 84, self.view.frame.size.width - 20, 40)];
+        _mediaCaption.scrollEnabled = YES;
+        _mediaCaption.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+        _mediaCaption.textColor = [UIColor whiteColor];
+        _mediaCaption.font = [UIFont systemFontOfSize:15];
+        
+        _mediaCaption.placeHolderText = @"add caption";
+        _mediaCaption.placeHolderTextColor = [UIColor grayColor];
+        _mediaCaption.placeHolderFont = [UIFont systemFontOfSize:15];
+    }
+    
+    if (![self.view.subviews containsObject:_mediaCaption])
+    {
+        [self.view addSubview:_mediaCaption];
+        [self.view bringSubviewToFront:_mediaCaption];
+    }
+}
+
+- (void)showMediaCaptionWithString:(NSString*)string
+{
+    [self addMediaCaptionTextView];
+    
+    if (string)
+    {
+        _mediaCaption.text = string;
+    }
+
+}
+
+
 
 - (void)doneButtonClick {
     TZImagePickerController *_tzImagePickerVc = (TZImagePickerController *)self.navigationController;

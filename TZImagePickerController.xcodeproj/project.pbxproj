@@ -31,7 +31,8 @@
 		90CE84AE1C3A89EF003D0779 /* TZImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 90CE84AD1C3A89EF003D0779 /* TZImageManager.m */; };
 		90CE84B71C3BABB6003D0779 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90CE84B61C3BABB6003D0779 /* TZVideoPlayerController.m */; };
 		90EBF5D61C2E298000CB9BCC /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 90EBF5D51C2E298000CB9BCC /* UIView+Layout.m */; };
-		A6904D9C1EA4979B0079BA02 /* SGCustomBottomBarOnPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = A6904D9B1EA4979B0079BA02 /* SGCustomBottomBarOnPreview.m */; };
+		A60A6CA7209206F600C81874 /* text.png in Resources */ = {isa = PBXBuildFile; fileRef = A60A6CA6209206F600C81874 /* text.png */; };
+		A60A6CAA2093072500C81874 /* SGMediaCaptionCustomTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A60A6CA92093072500C81874 /* SGMediaCaptionCustomTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,8 +102,9 @@
 		90CE84B61C3BABB6003D0779 /* TZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZVideoPlayerController.m; sourceTree = "<group>"; };
 		90EBF5D41C2E298000CB9BCC /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		90EBF5D51C2E298000CB9BCC /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
-		A6904D9A1EA4979B0079BA02 /* SGCustomBottomBarOnPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGCustomBottomBarOnPreview.h; sourceTree = "<group>"; };
-		A6904D9B1EA4979B0079BA02 /* SGCustomBottomBarOnPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGCustomBottomBarOnPreview.m; sourceTree = "<group>"; };
+		A60A6CA6209206F600C81874 /* text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = text.png; path = TZImagePickerController.bundle/text.png; sourceTree = "<group>"; };
+		A60A6CA82093072500C81874 /* SGMediaCaptionCustomTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMediaCaptionCustomTextView.h; sourceTree = "<group>"; };
+		A60A6CA92093072500C81874 /* SGMediaCaptionCustomTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMediaCaptionCustomTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		6DC358641CC8BAE300898D29 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A60A6CA6209206F600C81874 /* text.png */,
 				6DC358651CC8BAFD00898D29 /* TZImagePickerController.bundle */,
 			);
 			name = Resources;
@@ -243,8 +246,8 @@
 		A6904D991EA4977A0079BA02 /* SG Added */ = {
 			isa = PBXGroup;
 			children = (
-				A6904D9A1EA4979B0079BA02 /* SGCustomBottomBarOnPreview.h */,
-				A6904D9B1EA4979B0079BA02 /* SGCustomBottomBarOnPreview.m */,
+				A60A6CA82093072500C81874 /* SGMediaCaptionCustomTextView.h */,
+				A60A6CA92093072500C81874 /* SGMediaCaptionCustomTextView.m */,
 			);
 			name = "SG Added";
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				900E658F1C2BB8D5003D9A9E /* LaunchScreen.storyboard in Resources */,
 				6DC358661CC8BAFD00898D29 /* TZImagePickerController.bundle in Resources */,
 				900E658C1C2BB8D5003D9A9E /* Assets.xcassets in Resources */,
+				A60A6CA7209206F600C81874 /* text.png in Resources */,
 				900E658A1C2BB8D5003D9A9E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +393,7 @@
 				90CE84B71C3BABB6003D0779 /* TZVideoPlayerController.m in Sources */,
 				900EF0021C2BD7E400EA709B /* TZAssetCell.m in Sources */,
 				6DD0502B1DF659ED0057C78D /* TZProgressView.m in Sources */,
+				A60A6CAA2093072500C81874 /* SGMediaCaptionCustomTextView.m in Sources */,
 				6D32B9BD1CD83640005CE1E0 /* LxGridViewFlowLayout.m in Sources */,
 				6D4608311DFFC60D004FB009 /* TZGifPhotoPreviewController.m in Sources */,
 				900EF0161C2C134900EA709B /* TZPhotoPreviewCell.m in Sources */,
@@ -398,7 +403,6 @@
 				900E65811C2BB8D5003D9A9E /* main.m in Sources */,
 				900EF0121C2C107400EA709B /* TZPhotoPreviewController.m in Sources */,
 				6D5358CD1D64600F00928CC6 /* NSBundle+TZImagePicker.m in Sources */,
-				A6904D9C1EA4979B0079BA02 /* SGCustomBottomBarOnPreview.m in Sources */,
 				900EEFF81C2BBF9500EA709B /* TZImagePickerController.m in Sources */,
 				6DC84D0A1DF5358500A107A9 /* TZImageCropManager.m in Sources */,
 			);

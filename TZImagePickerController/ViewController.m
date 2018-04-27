@@ -221,9 +221,9 @@
     
     // 3. Set allow picking video & photo & originalPhoto or not
     // 3. 设置是否可以选择视频/图片/原图
-    imagePickerVc.allowPickingVideo = YES;
-    imagePickerVc.allowPickingImage = NO;
-    imagePickerVc.allowPickingOriginalPhoto = NO;
+    imagePickerVc.allowPickingVideo = NO;
+    imagePickerVc.allowPickingImage = YES;
+    imagePickerVc.allowPickingOriginalPhoto = YES;
     imagePickerVc.allowPickingGif = NO;
     
     // 4. 照片排列按修改时间升序
