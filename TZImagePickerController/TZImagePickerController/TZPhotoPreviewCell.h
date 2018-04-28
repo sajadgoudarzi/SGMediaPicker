@@ -9,9 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class TZAssetModel,TZProgressView,TZPhotoPreviewView;
-@interface TZPhotoPreviewCell : UICollectionViewCell
+
+@interface SGMediaPreviewCell : UICollectionViewCell
 
 @property (nonatomic, strong) TZAssetModel *model;
+
+@end
+
+
+
+@interface TZPhotoPreviewCell : SGMediaPreviewCell
+
 @property (nonatomic, copy) void (^singleTapGestureBlock)();
 @property (nonatomic, copy) void (^imageProgressUpdateBlock)(double progress);
 
@@ -25,9 +33,8 @@
 @end
 
 
-@interface SGVideoPreviewCell : UICollectionViewCell
+@interface SGVideoPreviewCell : SGMediaPreviewCell
 
-@property (nonatomic, strong) TZAssetModel* model;
 @property (nonatomic, copy) void (^singleTapGestureBlock)();
 
 

@@ -14,6 +14,13 @@
 #import "TZImageCropManager.h"
 #import "TZImagePickerController.h"
 
+@implementation SGMediaPreviewCell
+
+
+@end
+
+
+
 @interface TZPhotoPreviewCell ()
 @end
 
@@ -41,7 +48,7 @@
 }
 
 - (void)setModel:(TZAssetModel *)model {
-    _model = model;
+    super.model = model;
     _previewView.asset = model.asset;
 }
 
@@ -87,7 +94,7 @@
 }
 
 - (void)setModel:(TZAssetModel *)model{
-    _model = model;
+    super.model = model;
     [self configMoviePlayer];
     
 }
@@ -113,7 +120,7 @@
 
 
 - (void)configMoviePlayer {
-    [[TZImageManager manager] getPhotoWithAsset:_model.asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+    [[TZImageManager manager] getPhotoWithAsset:super.model.asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
         _cover = photo;
         _imageView = [[UIImageView alloc] initWithImage:_cover];
         
@@ -178,7 +185,7 @@
     
     if (!_player)
     {
-        [[TZImageManager manager] getVideoWithAsset:_model.asset completion:^(AVPlayerItem *playerItem, NSDictionary *info) {
+        [[TZImageManager manager] getVideoWithAsset:super.model.asset completion:^(AVPlayerItem *playerItem, NSDictionary *info) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 _player = [AVPlayer playerWithPlayerItem:playerItem];

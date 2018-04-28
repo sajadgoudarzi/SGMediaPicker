@@ -11,7 +11,8 @@
 
 @implementation SGMediaCaptionCustomTextView
 {
-    CGSize actualEmptySize;
+    CGSize _actualEmptySize;
+    BOOL _textWithPlaceHolder;
     
 }
 
@@ -28,16 +29,25 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        actualEmptySize = frame.size;
+        _actualEmptySize = frame.size;
         self.delegate = self;
         self.layer.cornerRadius = 4;
+        
     }
     return self;
 }
 
 - (void)setDelegate:(id<UITextViewDelegate>)delegate
 {
-    super.delegate = self;
+    if (delegate)
+    {
+        super.delegate = self;
+    }
+    else
+    {
+        super.delegate = nil;
+    }
+    
 }
 
 
@@ -48,6 +58,8 @@
     {
         text = self.placeHolderText;
         self.textColor = self.placeHolderTextColor;
+        self.font = self.placeHolderFont;
+        _textWithPlaceHolder = YES;
     }
     else
     {
@@ -59,10 +71,10 @@
 
 - (void)adjustFrameWithText
 {
-    if ([super.text isEqualToString:self.placeHolderText])
+    if ([super.text isEqualToString:self.placeHolderText] )
     {
         // handle placeholder text size;
-        self.frame = CGRectMake(self.frame.origin.x, CGRectGetMaxY(self.frame) - actualEmptySize.height, actualEmptySize.width, actualEmptySize.height);
+        self.frame = CGRectMake(self.frame.origin.x, CGRectGetMaxY(self.frame) - _actualEmptySize.height, _actualEmptySize.width, _actualEmptySize.height);
     }
     else
     {
@@ -71,17 +83,49 @@
         {
             
         }
-        self.frame = CGRectMake(self.frame.origin.x, CGRectGetMaxY(self.frame) -self.contentSize.height , self.contentSize.width, self.contentSize.height);
+        CGFloat desiredHeight = self.contentSize.height < _actualEmptySize.height ? _actualEmptySize.height : self.contentSize.height;
+        if (desiredHeight != self.frame.size.height)
+        {
+            self.frame = CGRectMake(self.frame.origin.x, CGRectGetMaxY(self.frame) - desiredHeight , self.contentSize.width, desiredHeight);
+        }
+
     }
 }
 
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([super.text isEqualToString:self.placeHolderText])
+    if ([super.text isEqualToString:self.placeHolderText] && _textWithPlaceHolder)
     {
         super.text = nil;
+        _textWithPlaceHolder = NO;
+        self.textColor = self.defaultTextColor;
+        self.font = self.defaultTextFont;
     }
+    else
+    {
+        //pass 
+        
+    }
+}
+
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if ([self.captionTextViewDelegate respondsToSelector:@selector(captionTextDidUpdate:UpdatedText:)])
+    {
+        [self.captionTextViewDelegate captionTextDidUpdate:self UpdatedText:self.text];
+    }
+    [self adjustFrameWithText];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (textView.text.length + text.length >= self.maxTextLength  && ![text isEqualToString:@""] && text )
+    {
+        return NO;
+    }
+    return YES;
 }
 
 

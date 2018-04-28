@@ -15,7 +15,7 @@
 #import "TZImageCropManager.h"
 #import "SGMediaCaptionCustomTextView.h"
 
-@interface TZPhotoPreviewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate> {
+@interface TZPhotoPreviewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate, SGMediaCaptionCustomTextViewProtocol> {
     UICollectionView *_collectionView;
     NSArray *_photosTemp;
     NSArray *_assetsTemp;
@@ -36,7 +36,7 @@
 @property (nonatomic, assign) BOOL isHideNaviBar;
 @property (nonatomic, strong) UIView *cropBgView;
 @property (nonatomic, strong) UIView *cropView;
-
+@property (nonatomic, strong) SGMediaCaptionCustomTextView* mediaCaption;
 @property (nonatomic, assign) double progress;
 @end
 
@@ -304,7 +304,8 @@
     }
     else
     {
-        [self showMediaCaptionWithString:nil];
+        
+        [self showMediaCaptionWithString:[_models[_currentIndex] caption]];
         
     }
 
@@ -321,13 +322,16 @@
     {
         _mediaCaption = [[SGMediaCaptionCustomTextView alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height - 84, self.view.frame.size.width - 20, 40)];
         _mediaCaption.scrollEnabled = YES;
-        _mediaCaption.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
-        _mediaCaption.textColor = [UIColor whiteColor];
-        _mediaCaption.font = [UIFont systemFontOfSize:15];
+        _mediaCaption.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        _mediaCaption.defaultTextColor = [UIColor whiteColor];
+        _mediaCaption.defaultTextFont = [UIFont systemFontOfSize:15];
         
         _mediaCaption.placeHolderText = @"add caption ...";
         _mediaCaption.placeHolderTextColor = [UIColor grayColor];
         _mediaCaption.placeHolderFont = [UIFont systemFontOfSize:15];
+        
+        _mediaCaption.captionTextViewDelegate = self;
+        _mediaCaption.maxTextLength = 256;
     }
     
     if (![self.view.subviews containsObject:_mediaCaption])
@@ -402,6 +406,15 @@
     
     if (currentIndex < _models.count && _currentIndex != currentIndex) {
         _currentIndex = currentIndex;
+        if ([_models[_currentIndex] caption])
+        {
+            [self showMediaCaptionWithString:[_models[_currentIndex] caption]];
+        }
+        else
+        {
+            [self removeMeidaCaptionTextView];
+        }
+        
         [self refreshNaviBarAndBottomBarState];
     }
 }
@@ -433,11 +446,14 @@
         if (!cell.singleTapGestureBlock) {
             __weak typeof(_naviBar) weakNaviBar = _naviBar;
             __weak typeof(_toolBar) weakToolBar = _toolBar;
+  
             cell.singleTapGestureBlock = ^(){
                 // show or hide naviBar / 显示或隐藏导航栏
                 weakSelf.isHideNaviBar = !weakSelf.isHideNaviBar;
                 weakNaviBar.hidden = weakSelf.isHideNaviBar;
                 weakToolBar.hidden = weakSelf.isHideNaviBar;
+                weakSelf.mediaCaption.hidden = !weakSelf.mediaCaption.hidden;
+                
             };
         }
         [cell setImageProgressUpdateBlock:^(double progress) {
@@ -537,6 +553,41 @@
     [[TZImageManager manager] getPhotosBytesWithArray:@[_models[_currentIndex]] completion:^(NSString *totalBytes) {
         _originalPhotoLabel.text = [NSString stringWithFormat:@"(%@)",totalBytes];
     }];
+}
+
+
+
+
+#pragma mark - SGMediaCaptionCustomTextViewProtocol Methods
+
+- (void)captionTextDidUpdate:(SGMediaCaptionCustomTextView *)captionTextView UpdatedText:(NSString *)updatedText
+{
+//    if (_collectionView.visibleCells.count == 1)
+//    {
+//        if ([_collectionView.visibleCells.firstObject isKindOfClass:[SGMediaPreviewCell class]])
+//        {
+//            SGMediaPreviewCell* cell = (SGMediaPreviewCell*)_collectionView.visibleCells.firstObject;
+//            cell.model.caption = updatedText;
+//        }
+//        else
+//        {
+//            NSLog(@"cannot identify the cell");
+//        }
+//        
+//    }
+//    else
+//    {
+//        NSLog(@"cannot identify the cell");
+//    }
+    
+    
+    TZAssetModel* model = _models[_currentIndex];
+    model.caption = updatedText;
+    
+    if (![updatedText isEqualToString:@""] && updatedText && !_selectButton.isSelected)
+    {
+        [self select:_selectButton];
+    }
 }
 
 @end

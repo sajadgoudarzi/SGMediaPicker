@@ -13,6 +13,10 @@
 
 @protocol SGMediaCaptionCustomTextViewProtocol <NSObject>
 
+@optional
+- (void)captionTextDidUpdate:(SGMediaCaptionCustomTextView*)captionTextView UpdatedText:(NSString*)updatedText;
+
+
 
 @end
 
@@ -27,8 +31,11 @@
 @property (nonatomic, strong) UIColor* defaultTextColor;
 @property (nonatomic, strong) UIFont* defaultTextFont;
 
+@property (nonatomic, weak) id <SGMediaCaptionCustomTextViewProtocol> captionTextViewDelegate;
 
 @property (nonatomic, assign) CGFloat maxHeight;
+@property (nonatomic, assign) NSInteger maxTextLength;
+
 
 
 - (void)setText:(NSString *)text;
