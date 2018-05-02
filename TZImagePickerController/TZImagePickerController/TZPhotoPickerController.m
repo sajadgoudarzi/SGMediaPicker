@@ -202,26 +202,27 @@ static CGSize AssetGridThumbnailSize;
     
     if (tzImagePickerVc.allowPickingOriginalPhoto) {
         CGFloat fullImageWidth = [tzImagePickerVc.fullImageBtnTitleStr boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size.width;
-        _originalPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _originalPhotoButton.frame = CGRectMake(CGRectGetMaxX(_previewButton.frame), self.view.tz_height - 50, fullImageWidth + 56, 50);
-        _originalPhotoButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
-        [_originalPhotoButton addTarget:self action:@selector(originalPhotoButtonClick) forControlEvents:UIControlEventTouchUpInside];
-        _originalPhotoButton.titleLabel.font = [UIFont systemFontOfSize:16];
-        [_originalPhotoButton setTitle:tzImagePickerVc.fullImageBtnTitleStr forState:UIControlStateNormal];
-        [_originalPhotoButton setTitle:tzImagePickerVc.fullImageBtnTitleStr forState:UIControlStateSelected];
-        [_originalPhotoButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [_originalPhotoButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-        [_originalPhotoButton setImage:[UIImage imageNamedFromMyBundle:tzImagePickerVc.photoOriginDefImageName] forState:UIControlStateNormal];
-        [_originalPhotoButton setImage:[UIImage imageNamedFromMyBundle:tzImagePickerVc.photoOriginSelImageName] forState:UIControlStateSelected];
-        _originalPhotoButton.selected = _isSelectOriginalPhoto;
-        _originalPhotoButton.enabled = tzImagePickerVc.selectedModels.count > 0;
+//        _originalPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _originalPhotoButton.frame = CGRectMake(CGRectGetMaxX(_previewButton.frame), self.view.tz_height - 50, fullImageWidth + 56, 50);
+//        _originalPhotoButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+//        [_originalPhotoButton addTarget:self action:@selector(originalPhotoButtonClick) forControlEvents:UIControlEventTouchUpInside];
+//        _originalPhotoButton.titleLabel.font = [UIFont systemFontOfSize:16];
+//        [_originalPhotoButton setTitle:tzImagePickerVc.fullImageBtnTitleStr forState:UIControlStateNormal];
+//        [_originalPhotoButton setTitle:tzImagePickerVc.fullImageBtnTitleStr forState:UIControlStateSelected];
+//        [_originalPhotoButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+//        [_originalPhotoButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+//        [_originalPhotoButton setImage:[UIImage imageNamedFromMyBundle:tzImagePickerVc.photoOriginDefImageName] forState:UIControlStateNormal];
+//        [_originalPhotoButton setImage:[UIImage imageNamedFromMyBundle:tzImagePickerVc.photoOriginSelImageName] forState:UIControlStateSelected];
+//        _originalPhotoButton.selected = _isSelectOriginalPhoto;
+//        _originalPhotoButton.enabled = tzImagePickerVc.selectedModels.count > 0;
         
         _originalPhotoLabel = [[UILabel alloc] init];
         _originalPhotoLabel.frame = CGRectMake(fullImageWidth + 46, 0, 80, 50);
         _originalPhotoLabel.textAlignment = NSTextAlignmentLeft;
         _originalPhotoLabel.font = [UIFont systemFontOfSize:16];
         _originalPhotoLabel.textColor = [UIColor blackColor];
-        if (_isSelectOriginalPhoto) [self getSelectedPhotoBytes];
+//        if (_isSelectOriginalPhoto)
+        [self getSelectedPhotoBytes];
     }
     
     _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -258,9 +259,10 @@ static CGSize AssetGridThumbnailSize;
     [bottomToolBar addSubview:_doneButton];
     [bottomToolBar addSubview:_numberImageView];
     [bottomToolBar addSubview:_numberLabel];
+    [bottomToolBar addSubview:_originalPhotoLabel];
     [self.view addSubview:bottomToolBar];
-    [self.view addSubview:_originalPhotoButton];
-    [_originalPhotoButton addSubview:_originalPhotoLabel];
+//    [self.view addSubview:_originalPhotoButton];
+    
 }
 
 #pragma mark - Click Event

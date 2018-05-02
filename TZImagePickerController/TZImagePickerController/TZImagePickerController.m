@@ -136,7 +136,7 @@
         self.allowPickingOriginalPhoto = YES;
         self.allowPickingVideo = YES;
         self.allowPickingImage = YES;
-        self.allowTakePicture = YES;
+        self.allowTakePicture = NO;
         self.sortAscendingByModificationDate = YES;
         self.autoDismiss = YES;
         self.columnNumber = columnNumber;

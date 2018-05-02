@@ -210,7 +210,7 @@
         // 1.设置目前已经选中的图片数组
         imagePickerVc.selectedAssets = _selectedAssets; // 目前已经选中的图片数组
     }
-    imagePickerVc.allowTakePicture = self.showTakePhotoBtnSwitch.isOn; // 在内部显示拍照按钮
+    imagePickerVc.allowTakePicture = NO; // 在内部显示拍照按钮
     
     // 2. Set the appearance
     // 2. 在这里设置imagePickerVc的外观
@@ -221,9 +221,9 @@
     
     // 3. Set allow picking video & photo & originalPhoto or not
     // 3. 设置是否可以选择视频/图片/原图
-    imagePickerVc.allowPickingVideo = NO;
+    imagePickerVc.allowPickingVideo = YES;
     imagePickerVc.allowPickingImage = YES;
-    imagePickerVc.allowPickingOriginalPhoto = YES;
+    imagePickerVc.allowPickingOriginalPhoto =  YES;
     imagePickerVc.allowPickingGif = NO;
     
     // 4. 照片排列按修改时间升序

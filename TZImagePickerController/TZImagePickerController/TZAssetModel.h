@@ -29,8 +29,12 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) NSInteger fileSizeByte;
 @property (nonatomic, assign) BOOL shouldBeCompressed;
-@property (nonatomic, assign) NSInteger pureTimeLegnth;
+@property (nonatomic, assign) NSInteger pureTimeLegnth;   // in second
 @property (nonatomic, assign) CGSize assetPresentationSize;
+
+
+// Files thumbnail and so on
+
 
 
 

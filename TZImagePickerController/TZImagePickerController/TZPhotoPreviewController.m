@@ -113,18 +113,18 @@
     TZImagePickerController *_tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     if (_tzImagePickerVc.allowPickingOriginalPhoto) {
         CGFloat fullImageWidth = [_tzImagePickerVc.fullImageBtnTitleStr boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size.width;
-        _originalPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _originalPhotoButton.frame = CGRectMake(0, 0, fullImageWidth + 56, 44);
-        _originalPhotoButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
-        _originalPhotoButton.backgroundColor = [UIColor clearColor];
-        [_originalPhotoButton addTarget:self action:@selector(originalPhotoButtonClick) forControlEvents:UIControlEventTouchUpInside];
-        _originalPhotoButton.titleLabel.font = [UIFont systemFontOfSize:13];
-        [_originalPhotoButton setTitle:_tzImagePickerVc.fullImageBtnTitleStr forState:UIControlStateNormal];
-        [_originalPhotoButton setTitle:_tzImagePickerVc.fullImageBtnTitleStr forState:UIControlStateSelected];
-        [_originalPhotoButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [_originalPhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        [_originalPhotoButton setImage:[UIImage imageNamedFromMyBundle:_tzImagePickerVc.photoPreviewOriginDefImageName] forState:UIControlStateNormal];
-        [_originalPhotoButton setImage:[UIImage imageNamedFromMyBundle:_tzImagePickerVc.photoOriginSelImageName] forState:UIControlStateSelected];
+//        _originalPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _originalPhotoButton.frame = CGRectMake(0, 0, fullImageWidth + 56, 44);
+//        _originalPhotoButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+//        _originalPhotoButton.backgroundColor = [UIColor clearColor];
+//        [_originalPhotoButton addTarget:self action:@selector(originalPhotoButtonClick) forControlEvents:UIControlEventTouchUpInside];
+//        _originalPhotoButton.titleLabel.font = [UIFont systemFontOfSize:13];
+//        [_originalPhotoButton setTitle:_tzImagePickerVc.fullImageBtnTitleStr forState:UIControlStateNormal];
+//        [_originalPhotoButton setTitle:_tzImagePickerVc.fullImageBtnTitleStr forState:UIControlStateSelected];
+//        [_originalPhotoButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+//        [_originalPhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+//        [_originalPhotoButton setImage:[UIImage imageNamedFromMyBundle:_tzImagePickerVc.photoPreviewOriginDefImageName] forState:UIControlStateNormal];
+//        [_originalPhotoButton setImage:[UIImage imageNamedFromMyBundle:_tzImagePickerVc.photoOriginSelImageName] forState:UIControlStateSelected];
         
         _originalPhotoLabel = [[UILabel alloc] init];
         _originalPhotoLabel.frame = CGRectMake(fullImageWidth + 42, 0, 80, 44);
@@ -161,7 +161,7 @@
     // Add Text Button
     
     _addTextButton = [[UIButton alloc] init];
-    _addTextButton.frame = CGRectMake(_numberLabel.frame.origin.x - 50, 7, 34, 34);
+    _addTextButton.frame = CGRectMake(20, 8, 30, 30);
     [_addTextButton addTarget:self action:@selector(addTextButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [_addTextButton setImage:[UIImage imageNamed:@"text.png"] forState:UIControlStateNormal];
 //    [_addTextButton setBackgroundImage:[UIImage imageNamed:@"text.png"] forState:UIControlStateNormal];
@@ -344,7 +344,7 @@
 - (void)showMediaCaptionWithString:(NSString*)string
 {
     [self addMediaCaptionTextView];
-    
+    string = [string isEqualToString:@""]? nil : string;
     _mediaCaption.text = string;
 
 }
