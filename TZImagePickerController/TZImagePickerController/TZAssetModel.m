@@ -25,6 +25,16 @@
     return model;
 }
 
+
++ (instancetype)modelWithAsset:(id)asset type:(TZAssetModelMediaType)type timeLength:(NSString *)timeLength size:(CGSize)size pureTimeLength:(NSInteger)pureTimeLength
+{
+    TZAssetModel *model = [self modelWithAsset:asset type:type];
+    model.timeLength = timeLength;
+    model.assetPresentationSize = size;
+    model.pureTimeLegnth = pureTimeLength;
+    return model;
+}
+
 @end
 
 

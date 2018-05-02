@@ -292,9 +292,11 @@ static CGFloat TZScreenScale;
                 return nil;
             }
         }
-        NSString *timeLength = type == TZAssetModelMediaTypeVideo ? [NSString stringWithFormat:@"%0.0f",phAsset.duration] : @"";
-        timeLength = [self getNewTimeFromDurationSecond:timeLength.integerValue];
-        model = [TZAssetModel modelWithAsset:asset type:type timeLength:timeLength];
+        NSString *pureTimeLength = type == TZAssetModelMediaTypeVideo ? [NSString stringWithFormat:@"%0.0f",phAsset.duration] : @"";
+        
+        NSString* timeLength = [self getNewTimeFromDurationSecond:pureTimeLength.integerValue];
+        
+        model = [TZAssetModel modelWithAsset:asset type:type timeLength:timeLength size:CGSizeMake(phAsset.pixelWidth, phAsset.pixelHeight) pureTimeLength:pureTimeLength.integerValue];
     } else {
         if (!allowPickingVideo){
             model = [TZAssetModel modelWithAsset:asset type:type];
@@ -343,13 +345,28 @@ static CGFloat TZScreenScale;
     __block NSInteger assetCount = 0;
     for (NSInteger i = 0; i < photos.count; i++) {
         TZAssetModel *model = photos[i];
+        if (model.fileSize)
+        {
+            assetCount ++;
+            dataLength += model.fileSizeByte;
+            if (completion && assetCount >= photos.count)
+            {
+                completion([self getBytesFromDataLength:dataLength]);
+            }
+            
+            continue;
+        }
         if ([model.asset isKindOfClass:[PHAsset class]]) {
             [[PHImageManager defaultManager] requestImageDataForAsset:model.asset options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
 //                if (model.type != TZAssetModelMediaTypeVideo)
                     dataLength += imageData.length;
+                model.fileSizeByte = imageData.length;
+                
+                model.fileSize = [self getBytesFromDataLength:model.fileSizeByte];
                 assetCount ++;
                 if (assetCount >= photos.count) {
                     NSString *bytes = [self getBytesFromDataLength:dataLength];
+                    
                     if (completion) completion(bytes);
                 }
             }];
@@ -357,8 +374,10 @@ static CGFloat TZScreenScale;
             ALAssetRepresentation *representation = [model.asset defaultRepresentation];
 //            if (model.type != TZAssetModelMediaTypeVideo)
                 dataLength += (NSInteger)representation.size;
+            model.fileSizeByte = dataLength;
             if (i >= photos.count - 1) {
                 NSString *bytes = [self getBytesFromDataLength:dataLength];
+                model.fileSize = bytes;
                 if (completion) completion(bytes);
             }
         }

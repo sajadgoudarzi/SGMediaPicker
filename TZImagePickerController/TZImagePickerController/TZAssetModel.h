@@ -25,11 +25,23 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) TZAssetModelMediaType type;
 @property (nonatomic, copy) NSString *timeLength;
 @property (nonatomic, copy) NSString *caption;
+@property (nonatomic, copy) NSString* fileSize;
+
+@property (nonatomic, assign) NSInteger fileSizeByte;
+@property (nonatomic, assign) BOOL shouldBeCompressed;
+@property (nonatomic, assign) NSInteger pureTimeLegnth;
+@property (nonatomic, assign) CGSize assetPresentationSize;
+
+
+
+
+
 
 /// Init a photo dataModel With a asset
 /// 用一个PHAsset/ALAsset实例，初始化一个照片模型
 + (instancetype)modelWithAsset:(id)asset type:(TZAssetModelMediaType)type;
 + (instancetype)modelWithAsset:(id)asset type:(TZAssetModelMediaType)type timeLength:(NSString *)timeLength;
++ (instancetype)modelWithAsset:(id)asset type:(TZAssetModelMediaType)type timeLength:(NSString *)timeLength size:(CGSize)size pureTimeLength:(NSInteger)pureTimeLength;
 
 @end
 
